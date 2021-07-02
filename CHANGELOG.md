@@ -1,3 +1,7 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* Simple android implementation with example
+
+## 0.0.2
+
+* Updated LICENSE
