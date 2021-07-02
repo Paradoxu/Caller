@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5282d4ff-57da-4916-beb4-5af09ccace83" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/android/src/main/java/me/leoletto/caller/CallReceiverHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.github/workflows/run_web.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../assets/images/profile_pic.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../assets/images/profile_pic.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../../ios/Runner/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/constants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/controllers/MenuController.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/models/MyFiles.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/models/MyFiles.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/models/RecentFile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/models/RecentFile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/responsive.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/screens/dashboard/components/chart.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/screens/dashboard/components/file_info_card.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/screens/dashboard/components/header.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/screens/dashboard/components/my_fields.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/screens/dashboard/components/my_files.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/screens/dashboard/components/recent_files.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/screens/dashboard/components/storage_details.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/screens/dashboard/components/storage_info_card.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/screens/dashboard/dashboard_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/screens/main/components/side_menu.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/screens/main/main_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../../macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../../pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../test/widget_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/../../windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../windows/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../windows/flutter/generated_plugin_registrant.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../windows/flutter/generated_plugins.cmake" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@C:\Users\Leandro\.android\avd\Pixel_4_XL_API_29.avd]" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1uckpVXjIAqRdqZNrePsiQRhupY" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="dart.analysis.tool.window.force.activate" value="true" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5282d4ff-57da-4916-beb4-5af09ccace83" name="Default Changelist" comment="" />
+      <created>1624972447569</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1624972447569</updated>
+    </task>
+    <servers />
+  </component>
+</project>
