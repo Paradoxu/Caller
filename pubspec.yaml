@@ -1,5 +1,5 @@
 name: caller
-description: A new flutter plugin project.
+description: A flutter plugin to handle Phone Call state in background
 version: 0.0.1
 homepage:
 

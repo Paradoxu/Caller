@@ -1,59 +1,45 @@
-import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:caller/caller.dart';
+import 'package:flutter/material.dart';
+
+/// Defines a callback that will handle all background incoming events
+///
+/// The duration will only have a value if the current event is `CallerEvent.callEnded`
+Future<void> callerCallbackHandler(
+  CallerEvent event,
+  String number,
+  int? duration,
+) async {
+  print("New event received from native $event");
+  switch (event) {
+    case CallerEvent.callEnded:
+      print('Ended a call with number $number and duration $duration');
+      break;
+    case CallerEvent.onMissedCall:
+      print('Missed a call from number $number');
+      break;
+    case CallerEvent.onIncomingCallAnswered:
+      print('Accepted call from number $number');
+      break;
+    case CallerEvent.onIncomingCallReceived:
+      print('Phone is ringing with number $number');
+      break;
+  }
+}
+
+Future<void> initialize() async {
+  /// Check if the user has granted permissions
+  final permission = await Caller.checkPermission();
+
+  /// If not, then request user permission to access the Call State
+  if (!permission)
+    Caller.requestPermissions();
+  else
+    Caller.initialize(callerCallbackHandler);
+}
 
 void main() {
-  runApp(MyApp());
-}
+  initialize();
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      platformVersion = 'Unknown platform version';
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
-      ),
-    );
-  }
+  /// Run your app as you would normally do...
+  /// runApp(MyApp());
 }
