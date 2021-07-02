@@ -1,16 +1,48 @@
-# caller_example
+# Caller
 
-Demonstrates how to use the caller plugin.
+A flutter plugin to handle Phone Call state and execute a Dart callback in background.
+<br />
 
-## Getting Started
+## Warning 
 
-This project is a starting point for a Flutter application.
+> This package is under development and since I'm not keen on native Android development, there may be a lot of work to do, so any PR are welcome.
 
-A few resources to get you started if this is your first Flutter project:
+<br />
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## IOS Implementation
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+> Unfortunately I'm not familiar with IOS development neither with Switf/ObjC languages, so if you wish to help any PR will be welcome.
+
+<br />
+
+## Getting started
+
+
+All you need to start using our package after installing it, is defining a callback which must be a top level function or static function, that will be called by our plugin when any incoming call events are detected.
+
+`
+void callerCallbackHandler(CallerEvent event, String number, int? duration)
+`
+
+This callback handler must accept 3 arguments:
+
+- <b>CallerEvent</b>: The event type detect by our plugin in background.
+
+- <b>Number</b>: The incoming number that is triggering the phone state call.
+
+- <b>duration</b>: An integer that will only have a value if the current `CallerEvent` is equal to `CallerEvent.callEnded`, and will contain the duration of the previous ended call in seconds.
+
+The `CallerEvent` is an `enum` with four possible values: 
+
+Event Value  | Description
+------------ | ------------
+onIncomingCallReceived | Triggered when the phone is ringing
+onIncomingCallAnswered | Triggered if the phone was ringing and the call was accepted by the user
+callEnded | Called after the onIncomingCallAnsewered to indicate that the call is ended
+onMissedCall | Triggered if the phone was ringing and the user did not answer the call
+
+Since all this process happens in background in a Dart Isolate, there's no guarantee that the current
+OS will call the registered callback as soon as an event is triggered or that the callback will ever be called at all,
+each OS handle background services with different policies. Make sure to ask user permission before calling the `Caller.initialize` 
+method of our plugin. Check the example to see a simple implementation of it.
+
