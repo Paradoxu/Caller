@@ -15,6 +15,32 @@ A flutter plugin to handle Phone Call state and execute a Dart callback in backg
 
 <br />
 
+## Android
+
+Add the following permissions to your `AndroidManifest.xml` file:
+
+
+```xml
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.READ_CALL_LOG" />
+```
+
+Also, apparently it is necessary to register the broadcast receiver manually,
+otherwise an error will be throw saying that our receiver does not exist inside the app:
+
+
+```xml
+<receiver android:name="me.leoletto.caller.CallerPhoneServiceReceiver"
+    android:exported="false">
+    <intent-filter>
+        <action android:name="android.intent.action.PHONE_STATE" />
+    </intent-filter>
+</receiver>
+```
+
+
+<br />
+
 ## Getting started
 
 

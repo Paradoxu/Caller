@@ -1,5 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.leoletto.caller_example">
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+
    <application
         android:label="caller_example"
         android:icon="@mipmap/ic_launcher">
@@ -37,5 +41,12 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-    </application>
+
+       <receiver android:name="me.leoletto.caller.CallerPhoneServiceReceiver"
+           android:exported="false">
+           <intent-filter>
+               <action android:name="android.intent.action.PHONE_STATE" />
+           </intent-filter>
+       </receiver>
+   </application>
 </manifest>

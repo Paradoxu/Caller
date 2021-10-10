@@ -73,7 +73,7 @@ class Caller {
   static Future<bool> checkPermission() async {
     try {
       final res = await _channel.invokeMethod('checkPermissions');
-      return res;
+      return res == true;
     } catch (_) {
       return false;
     }
