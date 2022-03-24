@@ -47,7 +47,7 @@ otherwise an error will be throw saying that our receiver does not exist inside 
 All you need to start using our package after installing it, is defining a callback which must be a top level function or static function, that will be called by our plugin when any incoming call events are detected.
 
 `
-void callerCallbackHandler(CallerEvent event, String number, int? duration)
+void callerCallbackHandler(CallerEvent event, String number, int duration)
 `
 
 This callback handler must accept 3 arguments:
@@ -56,19 +56,24 @@ This callback handler must accept 3 arguments:
 
 - <b>Number</b>: The incoming number that is triggering the phone state call.
 
-- <b>duration</b>: An integer that will only have a value if the current `CallerEvent` is equal to `CallerEvent.callEnded`, and will contain the duration of the previous ended call in seconds.
+- <b>duration</b>: An integer that represents the duration of the call in seconds.
 
 The `CallerEvent` is an `enum` with four possible values: 
 
 Event Value  | Description
 ------------ | ------------
-onIncomingCallReceived | Triggered when the phone is ringing
-onIncomingCallAnswered | Triggered if the phone was ringing and the call was accepted by the user
-callEnded | Called after the onIncomingCallAnsewered to indicate that the call is ended
-onMissedCall | Triggered if the phone was ringing and the user did not answer the call
+incoming | Indicates an incoming call.
+outgoing | Indicates an outgoing call.
 
 Since all this process happens in background in a Dart Isolate, there's no guarantee that the current
 OS will call the registered callback as soon as an event is triggered or that the callback will ever be called at all,
 each OS handle background services with different policies. Make sure to ask user permission before calling the `Caller.initialize` 
 method of our plugin. Check the example to see a simple implementation of it.
 
+
+# Breaking changes
+
+If you were using the previous version 1.x.x of this package, be aware that some breaking changes have been made.
+
+- Intermediate events won't be fired anymore, a single event will be fired when the call is ended, indicating 
+the type (incoming/outgoing), the duration and the phone number.

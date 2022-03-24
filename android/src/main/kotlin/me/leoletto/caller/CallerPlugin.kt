@@ -72,8 +72,7 @@ class CallerPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginRegi
       editor.remove(CALLBACK_USER_SHAREDPREFERENCES_KEY)
       val context: Context = currentActivity!!.applicationContext
       val receiver = ComponentName(context, CallerPhoneServiceReceiver::class.java)
-      val packageManager: PackageManager = context.packageManager
-      packageManager.setComponentEnabledSetting(receiver,
+        context.packageManager.setComponentEnabledSetting(receiver,
               PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
               PackageManager.DONT_KILL_APP
       )

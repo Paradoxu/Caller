@@ -7,7 +7,6 @@ import 'package:caller/src/failures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-export 'src/caller_handler.dart';
 export 'src/caller_event.dart';
 export 'src/failures.dart';
 
@@ -24,9 +23,7 @@ class Caller {
   /// An event callback should be a top level function or static function in order
   /// to be called by our callback dispatcher.
   ///
-  /// The duration argument represents the number of seconds of the last call and
-  /// will only have a value when the CallerEvent enum is equal to CallerEvent.callEnded
-  /// otherwise it will be null
+  /// The duration argument represents the number of seconds of call
   ///
   /// ```dart
   /// void onEventCallback(CallerEvent event, String number, int? duration){
@@ -40,7 +37,7 @@ class Caller {
   /// ```
   /// {@end-tool}
   static Future<void> initialize(
-    Function(CallerEvent, String, int?) onEventCallbackDispatcher,
+    Function(CallerEvent, String, int) onEventCallbackDispatcher,
   ) async {
     final hasPermissions = await Caller.checkPermission();
 
@@ -86,8 +83,6 @@ class Caller {
 }
 
 void _callbackDispatcher() {
-  print('me.leoletto - Callback dispatcher called from native code');
-
   // 1. Initialize MethodChannel used to communicate with the platform portion of the plugin.
   const MethodChannel _backgroundChannel =
       MethodChannel('me.leoletto.caller_background');
@@ -99,7 +94,7 @@ void _callbackDispatcher() {
   _backgroundChannel.setMethodCallHandler((MethodCall call) async {
     final args = call.arguments as List<dynamic>;
     print(
-      'me.leoletto - Method call handler called from native code ${args.elementAt(3)}',
+      '[ Caller ] - Called with arguments ${args.join(', ')}',
     );
 
     // 3.1. Retrieve callback instance for handle.
@@ -108,27 +103,20 @@ void _callbackDispatcher() {
     );
 
     late CallerEvent callerEvent;
-    switch (args.elementAt(3)) {
-      case 'callEnded':
-        callerEvent = CallerEvent.callEnded;
+    switch (args.elementAt(2)) {
+      case 'INCOMING':
+        callerEvent = CallerEvent.incoming;
         break;
-      case 'onMissedCall':
-        callerEvent = CallerEvent.onMissedCall;
-        break;
-      case 'onIncomingCallAnswered':
-        callerEvent = CallerEvent.onIncomingCallAnswered;
-        break;
-      case 'onIncomingCallReceived':
-        callerEvent = CallerEvent.onIncomingCallReceived;
+      case 'OUTGOING':
+        callerEvent = CallerEvent.outgoing;
         break;
       default:
         throw Exception('Unkown event name');
     }
 
-    // 3.3. Invoke callback.
-    userCallback?.call(callerEvent, args.elementAt(2), args.elementAt(4));
-  });
+    print('[ Caller ] - Calling user callback: ${userCallback?.toString()}');
 
-  // 4. Alert plugin that the callback handler is ready for events.
-  // _backgroundChannel.invokeMethod('initialized');
+    // 3.3. Invoke callback.
+    userCallback?.call(callerEvent, args.elementAt(4), args.elementAt(3));
+  });
 }

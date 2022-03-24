@@ -10,3 +10,9 @@
 
 * Refactor from JAVA to Kotlin
 * Update plugin register rules
+
+
+## 2.0.0
+
+* Added support for outgoing calls
+* Removed intermediate phone state events, a single event will be fired when the call is ended.

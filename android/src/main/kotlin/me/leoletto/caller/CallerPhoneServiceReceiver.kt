@@ -18,7 +18,7 @@ class CallerPhoneServiceReceiver : BroadcastReceiver() {
             val flutterLoader = FlutterLoader()
             flutterLoader.startInitialization(context)
             flutterLoader.ensureInitializationComplete(context, null)
-            callerPhoneStateListener = CallerPhoneStateListener(context, flutterLoader)
+            callerPhoneStateListener = CallerPhoneStateListener(context, intent, flutterLoader)
             telephony = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
             telephony!!.listen(callerPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE)
         }

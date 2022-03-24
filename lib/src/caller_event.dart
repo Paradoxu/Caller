@@ -1,6 +1,1 @@
-enum CallerEvent {
-  callEnded,
-  onMissedCall,
-  onIncomingCallAnswered,
-  onIncomingCallReceived,
-}
+enum CallerEvent { incoming, outgoing }
