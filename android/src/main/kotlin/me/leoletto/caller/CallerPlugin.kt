@@ -1,28 +1,26 @@
 package me.leoletto.caller
 
 import android.Manifest
-
+import android.app.Activity
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.provider.Settings
+import android.util.Log
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.content.ContextCompat
 import io.flutter.embedding.engine.plugins.FlutterPlugin
+import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterPluginBinding
+import io.flutter.embedding.engine.plugins.activity.ActivityAware
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import android.content.pm.PackageManager
-
-import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
-
-import androidx.core.app.ActivityCompat
-
-import androidx.core.content.ContextCompat
-
-import android.content.ComponentName
-
-import android.app.Activity
-import android.content.Context
-import android.util.Log
-import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterPluginBinding
-
-import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.plugin.common.PluginRegistry
 
 
@@ -108,18 +106,39 @@ class CallerPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginRegi
   }
 
   private fun requestPermissions() {
-    if (currentActivity != null && currentActivity!!.applicationContext != null) {
-      val permPhoneState = ContextCompat.checkSelfPermission(currentActivity!!, Manifest.permission.READ_PHONE_STATE)
-      val permReadCallLog = ContextCompat.checkSelfPermission(currentActivity!!, Manifest.permission.READ_CALL_LOG)
-      val grantedCode = PackageManager.PERMISSION_GRANTED
-      if (permPhoneState != grantedCode || permReadCallLog != grantedCode) {
-        val permissions = arrayOf(
-                Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.READ_CALL_LOG
-        )
-        ActivityCompat.requestPermissions(currentActivity!!, permissions, 999)
+    if (currentActivity?.applicationContext == null)
+      return;
+
+    val grantedCode = PackageManager.PERMISSION_GRANTED
+
+    val permissions = arrayOf(
+      Manifest.permission.READ_PHONE_STATE,
+      Manifest.permission.READ_CALL_LOG
+    )
+    val permissionsToAsk = arrayListOf<String>()
+
+    for(permission in permissions) {
+      val permState = ContextCompat.checkSelfPermission(currentActivity!!, permission)
+
+      if(permState == grantedCode)
+        continue
+
+      val shouldShowRequest = shouldShowRequestPermissionRationale(currentActivity!!, permission)
+
+      if(!shouldShowRequest){
+        val intent = Intent()
+        intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+        val uri = Uri.fromParts("package", currentActivity!!.packageName, null)
+        intent.data = uri
+        currentActivity!!.startActivity(intent)
+
+      } else {
+        permissionsToAsk.add(permission)
       }
     }
+
+    if(permissionsToAsk.size > 0)
+      ActivityCompat.requestPermissions(currentActivity!!, permissions, 999)
   }
 
   override fun onAttachedToActivity(binding: ActivityPluginBinding) {
