@@ -16,3 +16,7 @@
 
 * Added support for outgoing calls
 * Removed intermediate phone state events, a single event will be fired when the call is ended.
+
+## 2.0.2
+
+* Fix override of method `onRequestPermissionsResult` causing issues in compilation time.
