@@ -1,3 +1,7 @@
+
+
+> ## This package is no longer maintained
+>
 # Caller
 
 A flutter plugin to handle Phone Call state and execute a Dart callback in background.
